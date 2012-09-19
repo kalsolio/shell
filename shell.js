@@ -22,49 +22,20 @@
  */
 
 NEW_WINDOW_URL = "http://webian.org/shell/welcome/0.1/";
-DEFAULT_FAVICON = "images/no_favicon.ico"; 
+DEFAULT_FAVICON = "images/no_favicon.ico";
 
-var Browser = {
+var Shell = {
 
-  get clock() {
-    delete this.clock;
-    return this.clock = document.getElementById('clock');
-  },
+  init: function shellInit() {
+    this.clock = document.getElementById('clock');
+    this.homeScreen = document.getElementById('home_screen');
+    this.windows = document.getElementById('windows');
+    this.tabs = document.getElementById('tabs');
+    this.homeButton = document.getElementById('home_button');
+    this.newWindowButton = document.getElementById('new_window_button');
 
-  get homeScreen() {
-    delete this.homeScreen;
-    return this.homeScreen = document.getElementById('home_screen');
-  },
-
-  get windows() {
-    delete this.windows;
-    return this.windows = document.getElementById('windows');
-  },
-
-  get tabs() {
-    delete this.tabs;
-    return this.tabs = document.getElementById('tabs');
-  },
-
-  get windowTemplate() {
-    delete this.windowTemplate;
-    return this.windowTemplate = document.getElementById('window_template');
-  },
-
-  get homeButton() {
-    delete this.homeButton;
-    return this.homeButton = document.getElementById('home_button');
-  },
-
-  get newWindowButton() {
-    delete this.newWindowButton;
-    return this.newWindowButton = document.getElementById('new_window_button');
-  },
-
-  init: function browserInit() {
     window.setInterval(this.updateClock, 1000);
     this.newWindowButton.addEventListener('click', this.newWindow.bind(this));
-
     this.homeButton.addEventListener('click', this.showHomeScreen.bind(this));
 
     this.tabs.addEventListener('click', (function tabClick(evt) {
@@ -81,11 +52,11 @@ var Browser = {
       this.closeWindow(target.parentNode.parentNode);
     }).bind(this));
 
-    this.newWindow();
+    //this.newWindow();
     this.showWindows();
   },
 
-  updateClock: function browserUpdateClock() {
+  updateClock: function shellUpdateClock() {
     var date = new Date(),
     hours = date.getHours() + '', // get hours as string
     minutes = date.getMinutes() + ''; // get minutes as string
@@ -98,10 +69,10 @@ var Browser = {
     if(minutes.length < 2)
       minutes = "0" + minutes;
 
-    Browser.clock.innerHTML = hours + ":" + minutes;
+    Shell.clock.innerHTML = hours + ":" + minutes;
   },
 
-  newWindow: function browserNewWindow() {
+  newWindow: function shellNewWindow() {
     var windowId = (Math.random() + "").substring(2);
 
     var window = this.windowTemplate.cloneNode(true);
@@ -127,7 +98,7 @@ var Browser = {
     this.selectWindow(windowId);
   },
 
-  selectWindow: function browserSelectWindow(windowId) {
+  selectWindow: function shellSelectWindow(windowId) {
     this.showWindows();
     var selectedWindow = document.getElementsByClassName('selected window')[0];
     if (selectedWindow)
@@ -139,7 +110,7 @@ var Browser = {
     document.getElementById('tab_' + windowId).classList.add('selected');
   },
 
-  closeWindow: function browserCloseWindow(window) {
+  closeWindow: function shellCloseWindow(window) {
     if (window.nextSibling)
       this.selectWindow(window.nextSibling.id.substring(7));
     else if (window.previousSibling.classList &&
@@ -152,13 +123,13 @@ var Browser = {
     this.tabs.removeChild(tab);
   },
 
-  showWindows: function browserShowWindows() {
+  showWindows: function shellShowWindows() {
     this.homeScreen.classList.remove('active');
     this.windows.classList.add('active');
     this.homeButton.classList.add('active');
   },
 
-  showHomeScreen: function browserShowHomeScreen() {
+  showHomeScreen: function shellShowHomeScreen() {
     var selectedWindow = document.getElementsByClassName('selected window')[0];
     if (selectedWindow)
       selectedWindow.classList.remove('selected');
@@ -172,9 +143,9 @@ var Browser = {
 
 };
 
-window.addEventListener('load', function browserOnLoad(evt) {
-  window.removeEventListener('load', browserOnLoad);
-  Browser.init();
+window.addEventListener('load', function shellOnLoad(evt) {
+  window.removeEventListener('load', shellOnLoad);
+  Shell.init();
 });
 
 

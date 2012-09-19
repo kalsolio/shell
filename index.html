@@ -29,17 +29,17 @@
   <head>
     <meta charset="utf-8">
     <title>Webian Shell</title>
-    <link rel="stylesheet" href="main.css" type="text/css" />
-    <script type="text/javascript" src="main.js"></script>
+    <link rel="stylesheet" href="shell.css" type="text/css" />
+    <script type="text/javascript" src="shell.js"></script>
   </head>
 
-  <body>
+  <body role="application">
     <!-- Home Screen -->
     <div id="home_screen" class="active">
 
-      <div id="top_toolbar" class="toolbar">
-        <input id="power_button" type="image" src="images/power.png" class="button" alt="Shut down">
-      </div>
+      <menu type="toolbar" id="top_toolbar">
+        <button id="power_button" alt="Shut down">
+      </menu>
 
       <div id="widget_space">
 
@@ -48,36 +48,37 @@
     </div>
     <!-- End of Home Screen -->
 
+    <!-- Window Toolbar -->
+    <menu type="toolbar" id="window_toolbar">
+      <button id="back_button">
+      <button id="forward_button"></button>
+      <div id="address_bar">
+        <span class="document_title"></span>
+        <form id="url_form">
+          <input type="text" id="url_input">
+        </form>
+        <button id="go_button">
+      </div>
+      <button id="close_button">
+    </menu>
+    <!-- End of Window Toolbar -->
+
     <!-- Windows -->
     <div id="windows">
-      <div id="window_template" class="window">
-        <div class="toolbar window_toolbar">
-          <input type="image" src="images/back.png" class="back_button button" alt="Back">
-          <input type="image" src="images/forward.png" class="forward_button button" alt="Forward">
-          <div class="address_bar">
-            <span class="document_title"></span>
-            <form class="url_form">
-              <input type="text" class="url_input">
-            </form>
-            <input type="image" src="images/go.png" class="go_button" alt="Go">
-          </div>
-          <input type="image" src="images/close.png" class="close_button button" alt="Close">
-        </div>
+      <iframe class="window" src="http://webian.org/shell/welcome/0.1/">
         <!-- Insert iframe here -->
-      </div>
+      </iframe>
     </div>
     <!-- End of Windows -->
 
     <!-- Bottom Toolbar -->
-    <div id="bottom_toolbar" class="toolbar">
-      <div>
-        <input type="image" src="images/home.png" id="home_button" class="button" alt="Home">
-      </div>
+    <menu type="toolbar" id="system_toolbar">
+      <button id="home_button"></button
       <div id="tabs_container">
         <ul id="tabs">
           <!--<li class="selected tab"><img src="images/no_favicon.ico" /></li>-->
         </ul>
-        <img src="images/add.png" id="new_window_button" class="button" alt="New Tab" />
+        <button id="new_window_button"></button>
       </div>
       <div id="clock"></div>
     </div>
