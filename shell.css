@@ -43,28 +43,22 @@ menu[type="toolbar"] {
   padding: 0;
 }
 
-/* Home Screen Styles */
+/* Home Screen */
 
 #home_screen {
   display: none;
-  visibility: hidden;
   background-color: #000;
   padding: 0;
   margin: 0;
 }
 
 #home_screen.active {
-  visibility: visible;
   display: -moz-box;
-  -moz-box-flex: 1;  
+  -moz-box-flex: 1;
   -moz-box-orient: vertical;
 }
 
-#home_screen #top_toolbar {
-
-}
-
-#home_screen #top_toolbar #power_button {
+#power_button {
   position: absolute;
   right: 0;
   top: 0;
@@ -74,7 +68,7 @@ menu[type="toolbar"] {
   background-image: url('images/power.png');
 }
 
-#home_screen #widget_space {
+#icon_grid {
   background-image: url('webian_shell_logo.png'), -moz-radial-gradient(closest-side, #434343 0%, #000 100%);
   background-repeat: no-repeat;
   background-position: center center;
@@ -83,23 +77,19 @@ menu[type="toolbar"] {
   margin: 0;
 }
 
-/* Bottom Toolbar Styles */
+/* System Toolbar */
 
 #system_toolbar {
-  display: -moz-box;
-  -moz-box-orient: horizontal;
   background-color: #000;
 }
 
 #home_button {
   display: none;
-  visibility: hidden;
   background-image: url('images/home.png');
 }
 
 #home_button.active {
   display: inline;
-  visibility: visible;
 }
 
 #clock {
@@ -110,24 +100,19 @@ menu[type="toolbar"] {
   color: #fff;
 }
 
-#new_tab_button {
-  cursor: pointer;
-}
-
 /* Window Styles */
-#windows {
-  display: none;
-  visibility: hidden;
-}
-
-#windows.active {
+#frames {
   -moz-box-flex: 1;
-  visibility: visible;
-  display: -moz-box;
   -moz-box-orient: vertical;
+  display: none;
 }
 
-.window {
+#frames.active {
+  display: -moz-box;
+}
+
+.frame {
+  display: none;
   padding: 0;
   margin: 0;
   width: 100%;
@@ -139,18 +124,19 @@ menu[type="toolbar"] {
   border-bottom-left-radius: 5px;
 }
 
-.window.selected {
-
+.frame.selected {
+  display: block;
 }
 
 #window_toolbar {
+  display: none;
   background-color: #666;
-  top: 0px;
-  left: 0px;
-  -moz-border-radius-topleft: 5px;
-  -moz-border-radius-topright: 5px;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
+}
+
+#window_toolbar.active {
+  display: -moz-box;
 }
 
 button {
@@ -162,6 +148,7 @@ button {
   background-color: transparent;
   background-origin: content-box;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 #back_button {
@@ -181,18 +168,15 @@ button {
   background-image: url('images/close.png');
 }
 
-.document_title {
-  float: left;
+#page_title {
   color: #fff;
   font-weight: bold;
   padding: 2px 5px;
   display: none;
-  visibility: hidden;
 }
 
-.document_title.active {
+#page_title.active {
   display: block;
-  visibility: visible;
 }
 
 #address_bar {
@@ -235,20 +219,18 @@ button {
 }
 
 /* Tab Styles */
-#tabs_container {
-  -moz-box-flex: 1;
-}
-
 #tabs {
   margin: 0;
   padding: 0;
-  float: left;
+  height: 30px;
+  -moz-box-flex: 1;
 }
 
 .tab {
+  display: block
   padding: 0 0 0 5px;
   list-style-type: none;
-  margin: 0;
+  margin-left: 3px;
   float: left;
 }
 
@@ -257,15 +239,12 @@ button {
   display: block;
   width: 16px;
   height: 16px;
-  padding: 6px 8px;
-  -moz-border-radius-bottomleft: 5px;
-  -moz-border-radius-bottomright: 5px;
+  padding: 7px;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
 }
 
 #tabs.detached .tab img {
-  -moz-border-radius: 5px;
   border-radius: 5px;  
 }
 
@@ -273,15 +252,7 @@ button {
   background-color: #666;
 }
 
-.tab img:focus, 
-.tab img:hover {
-  cursor: pointer;
-}
-
 #new_window_button {
   background-image: url('images/add.png');
-}
-
-.document_title {
-  display: block;
+  height: 30px;
 }

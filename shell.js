@@ -21,42 +21,44 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-NEW_WINDOW_URL = "http://webian.org/shell/welcome/0.1/";
-DEFAULT_FAVICON = "images/no_favicon.ico";
-
 var Shell = {
 
-  init: function shellInit() {
+  NEW_WINDOW_URL: "http://webian.org/shell/welcome/0.1/",
+  DEFAULT_FAVICON: "images/no_favicon.ico",
+  windows: [],
+  currentWindow: 0,
+  windowCount: 0,
+
+  /**
+   * Init
+   *
+   * Initialises shell by setting references to all elements, adding event
+   * listeners, setting up the clock and creating the first window.
+   */
+  init: function shell_init() {
     this.clock = document.getElementById('clock');
     this.homeScreen = document.getElementById('home_screen');
-    this.windows = document.getElementById('windows');
+    this.frames = document.getElementById('frames');
+    this.windowToolbar = document.getElementById('window_toolbar');
+    this.closeButton = document.getElementById('close_button');
     this.tabs = document.getElementById('tabs');
     this.homeButton = document.getElementById('home_button');
     this.newWindowButton = document.getElementById('new_window_button');
 
     window.setInterval(this.updateClock, 1000);
     this.newWindowButton.addEventListener('click', this.newWindow.bind(this));
-    this.homeButton.addEventListener('click', this.showHomeScreen.bind(this));
+    this.homeButton.addEventListener('click', this.showHomescreen.bind(this));
+    this.closeButton.addEventListener('click', this.closeWindow.bind(this));
 
-    this.tabs.addEventListener('click', (function tabClick(evt) {
-      var tab = evt.target.parentNode;
-      if (!tab.classList.contains('tab'))
-        return;
-      this.selectWindow(tab.id.substring(4));
-    }).bind(this));
-
-    this.windows.addEventListener('click', (function windowClick(evt) {
-      var target = evt.target;
-      if (!target.classList.contains('close_button'))
-        return;
-      this.closeWindow(target.parentNode.parentNode);
-    }).bind(this));
-
-    //this.newWindow();
-    this.showWindows();
+    this.newWindow();
+    this.showFrames();
+    this.updateClock();
   },
 
-  updateClock: function shellUpdateClock() {
+  /**
+   * Update Clock
+   */
+  updateClock: function shell_updateClock() {
     var date = new Date(),
     hours = date.getHours() + '', // get hours as string
     minutes = date.getMinutes() + ''; // get minutes as string
@@ -72,79 +74,98 @@ var Shell = {
     Shell.clock.innerHTML = hours + ":" + minutes;
   },
 
-  newWindow: function shellNewWindow() {
-    var windowId = (Math.random() + "").substring(2);
+  /**
+   *  New Window
+   */
+  newWindow: function shell_newWindow() {
+    // Create window
+    var windowId = this.windowCount++;
+    var frame = document.createElement('iframe');
+    frame.classList.add('frame');
+    frame.src = this.NEW_WINDOW_URL;
+    this.frames.appendChild(frame);
 
-    var window = this.windowTemplate.cloneNode(true);
-    window.id = "window_" + windowId;
-    window.classList.add("selected");
+    // Create corresponding tab
+    var tab = document.createElement('li');
+    tab.classList.add('tab');
+    var icon = document.createElement('img');
+    icon.src = this.DEFAULT_FAVICON;
+    tab.appendChild(icon);
+    this.tabs.appendChild(tab);
 
-    var iframe = document.createElement('iframe');
-    iframe.classList.add('window_iframe');
-    iframe.id = "iframe_" + windowId;
-    iframe.src = NEW_WINDOW_URL;
-    window.appendChild(iframe);
-    this.windows.appendChild(window);
+    var windowListEntry = {
+      frame: frame,
+      tab: tab,
+    };
 
-    li = document.createElement('li');
-    li.id = "tab_" + windowId;
-    li.classList.add('tab');
-    img = document.createElement('img');
-    img.src = DEFAULT_FAVICON;
-    
-    li.appendChild(img);
-    this.tabs.appendChild(li);
-
+    this.windows[windowId] = windowListEntry;
     this.selectWindow(windowId);
   },
 
-  selectWindow: function shellSelectWindow(windowId) {
-    this.showWindows();
-    var selectedWindow = document.getElementsByClassName('selected window')[0];
-    if (selectedWindow)
-      selectedWindow.classList.remove('selected');
-    var selectedTab = document.getElementsByClassName('selected tab')[0]
-    if (selectedTab)
-      selectedTab.classList.remove('selected');
-    document.getElementById('window_' + windowId).classList.add('selected');
-    document.getElementById('tab_' + windowId).classList.add('selected');
+  /**
+   * Select Window
+   * 
+   * @param {number} ID of window to select.
+   */
+  selectWindow: function shell_selectWindow(windowId) {
+    this.windows[this.currentWindow].frame.classList.remove('selected');
+    this.windows[this.currentWindow].tab.classList.remove('selected');
+    this.windows[windowId].frame.classList.add('selected');
+    this.windows[windowId].tab.classList.add('selected');
+    this.currentWindow = windowId;
   },
 
-  closeWindow: function shellCloseWindow(window) {
-    if (window.nextSibling)
-      this.selectWindow(window.nextSibling.id.substring(7));
-    else if (window.previousSibling.classList &&
-      window.previousSibling.id != 'window_template')
-      this.selectWindow(window.previousSibling.id.substring(7));
-    else
-      this.showHomeScreen();
-    this.windows.removeChild(window);
-    var tab = document.getElementById('tab_' + window.id.substring(7));
-    this.tabs.removeChild(tab);
+
+  /**
+   * Close Window
+   */
+  closeWindow: function shell_closeWindow() {
+    if (!this.currentWindow)
+      return;
+    this.frames.removeChild(this.windows[this.currentWindow].frame);
+    this.tabs.removeChild(this.windows[this.currentWindow].tab);
+
+    // Delete the window
+    //this.windows.splice(this.currentWindow, 1);
+
+    //if (this.windows.length == 0) {
+    //  this.showHomescreen();
+    //  return;
+    //}
+
+    //var windowIds = Object.keys(this.windows);
+    //var currentWindowIndex = windowIds.indexOf(this.currentWindow);
+    //var newCurrentWindow = currentWindowIndex - 1;
   },
 
-  showWindows: function shellShowWindows() {
+  /**
+   * Show Frames
+   *
+   * Hide the homescreen and show window frames.
+   */
+  showFrames: function shell_showFrames() {
     this.homeScreen.classList.remove('active');
-    this.windows.classList.add('active');
+    this.windowToolbar.classList.add('active');
+    this.frames.classList.add('active');
     this.homeButton.classList.add('active');
   },
 
-  showHomeScreen: function shellShowHomeScreen() {
-    var selectedWindow = document.getElementsByClassName('selected window')[0];
-    if (selectedWindow)
-      selectedWindow.classList.remove('selected');
-    var selectedTab = document.getElementsByClassName('selected tab')[0]
-    if (selectedTab)
-      selectedTab.classList.remove('selected');
-    this.windows.classList.remove('active');
+  /**
+   * Show Homescreen
+   *
+   * Hide window frames and show homescreen
+   */
+  showHomescreen: function shell_showHomescreen() {
+    this.frames.classList.remove('active');
+    this.windowToolbar.classList.remove('active');
     this.homeButton.classList.remove('active');
     this.homeScreen.classList.add('active');
   }
 
 };
 
-window.addEventListener('load', function shellOnLoad(evt) {
-  window.removeEventListener('load', shellOnLoad);
+window.addEventListener('load', function shell_onLoad(evt) {
+  window.removeEventListener('load', shell_onLoad);
   Shell.init();
 });
 
