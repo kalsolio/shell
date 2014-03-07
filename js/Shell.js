@@ -27,12 +27,14 @@ var Shell = {
   /**
    * Initialise Shell.
    */
-  init: function shell_init() {
-    Grid.init();
+  init: function() {
+    //DB.init();
+    //Grid.init();
+    AppToolbar.init();
     SystemToolbar.init();
-    WindowManager.init();
-    WindowToolbar.init();
-    WindowFrame.init();
+    //WindowManager.init();
+    //WindowToolbar.init();
+    //WindowFrame.init();
   }
 };
 

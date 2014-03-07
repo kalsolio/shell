@@ -1,5 +1,5 @@
 /**
- * App icon grid.
+ * Icon grid.
  *
  * Copyright Ben Francis 2013
  *

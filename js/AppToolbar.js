@@ -1,9 +1,9 @@
 /**
- * System Toolbar
+ * App Toolbar
  *
- * Contains clock.
+ * Contains tabs and URL bar.
  *
- * Copyright Ben Francis 2013
+ * Copyright Ben Francis 2014
  *
  * Webian Shell is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,32 +20,13 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-var SystemToolbar = {
+var AppToolbar = {
 
   /**
-   * Initialise system toolbar.
+   * Initialise app toolbar.
    */
   init: function() {
-    this.clock = document.getElementById('clock');
-    this.updateClock();
-    window.setInterval(this.updateClock.bind(this), 1000);
-  },
-
-  /**
-   * Updates Clock.
-   */
-  updateClock: function() {
-    var date = new Date(),
-    hours = date.getHours() + '', // get hours as string
-    minutes = date.getMinutes() + ''; // get minutes as string
-
-    // pad with zero if needed
-    if (hours.length < 2)
-      hours = '0' + hours;
-    if (minutes.length < 2)
-      minutes = '0' + minutes;
-
-    this.clock.innerHTML = hours + ':' + minutes;
+    this.toolbar = document.getElementById('app-toolbar');
   }
 
 };

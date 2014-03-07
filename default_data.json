@@ -1,0 +1,120 @@
+{
+  "bookmarks": [
+    {
+      "name": "GMail",
+      "url": 'http://gmail.com',
+      "icons": [{
+        "src": "",
+        "width": "60",
+        "type": "image/png"
+      }]
+    },
+    {
+      "name": "Google Calendar",
+      "url": 'http://google.com/calendar',
+      "icons": [{
+        "src": "",
+        "width": "60",
+        "type": "image/png"
+      }]
+    },
+    {
+      "name": "Facebook",
+      "url": 'http://facebook.com',
+      "icons": [{
+        "src": "",
+        "width": "60",
+        "type": "image/png"
+      }]
+    },
+    {
+      "name": "Twitter",
+      "url": 'http://twitter.com',
+      "icons": [{
+        "src": "",
+        "width": "60",
+        "type": "image/png"
+      }]
+    },
+    {
+      "name": "Google News",
+      "url": 'http://news.google.com',
+      "icons": [{
+        "src": "",
+        "width": "60",
+        "type": "image/png"
+      }]
+    },
+    {
+      "name": "GitHub",
+      "url": 'http://github.com',
+      "icons": [{
+        "src": "",
+        "width": "60",
+        "type": "image/png"
+      }]
+    },
+    {
+      "name": "Evernote",
+      "url": 'http://evernote.com',
+      "icons": [{
+        "src": "",
+        "width": "60",
+        "type": "image/png"
+      }]
+    },
+    {
+      "name": "Pivotal Tracker",
+      "url": 'http://pivotaltracker.com',
+      "icons": [{
+        "src": "",
+        "width": "60",
+        "type": "image/png"
+      }]
+    },
+    {
+      "name": "Google Maps",
+      "url": 'http://maps.google.com',
+      "icons": [{
+        "src": "",
+        "width": "60",
+        "type": "image/png"
+      }]
+    },
+    {
+      "name": "Google Drive",
+      "url": 'http://drive.google.com',
+      "icons": [{
+        "src": "",
+        "width": "60",
+        "type": "image/png"
+      }]
+    },
+    {
+      "name": "YouTube",
+      "url": 'http://youtube.com',
+      "icons": [{
+        "src": "",
+        "width": "60",
+        "type": "image/png"
+      }]
+    },
+    {
+      "name": "LinkedIn",
+      "url": 'http://linkedin.com',
+      "icons": [{
+        "src": "",
+        "width": "60",
+        "type": "image/png"
+      }]
+    },
+    {
+      "name": "Browser",
+      "url": 'about:newtab',
+      "icons": [{
+        "src": "",
+        "width": "60",
+        "type": "image/png"
+      }]
+    }
+}

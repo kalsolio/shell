@@ -28,32 +28,63 @@
     <title>Webian Shell</title>
     <link rel="stylesheet" href="css/shell.css" type="text/css" />
     <script type="text/javascript" src="js/Shell.js"></script>
-    <script type="text/javascript" src="js/Grid.js"></script>
+    <!--<script type="text/javascript" src="js/DB.js"></script>
+    <script type="text/javascript" src="js/Grid.js"></script>-->
+    <script type="text/javascript" src="js/AppToolbar.js"></script>
     <script type="text/javascript" src="js/SystemToolbar.js"></script>
-    <script type="text/javascript" src="js/WindowManager.js"></script>
+    <!--<script type="text/javascript" src="js/WindowManager.js"></script>
     <script type="text/javascript" src="js/WindowFrame.js"></script>
-    <script type="text/javascript" src="js/WindowToolbar.js"></script>
+    <script type="text/javascript" src="js/WindowToolbar.js"></script>-->
   </head>
 
-  <body role="application">
+    <body role="application">
+        <button id="power-button"></button>
+    
+        <!--<section id="grid" class="visible">
+          <ul id="app_icons">
+          </ul>
+      </section>-->
 
-    <section id="grid" class="visible">
-      <ul id="app_icons">
+        <div id="windows">
+          <div id="group-1" class="window-group">
+            <iframe id="window-1" class="window" src="http://duckduckgo.com"></iframe>
+          </div>
+        </div>
+
+        <menu type="toolbar" id="app-toolbar" class="collapsed">
+        <!--<form id="address-bar">
+          <input id="url-input" type="text"></input>
+          <button id="url-button"></button>
+        </form>-->
+        <ul id="tabs">
+          <ul role="tablist" class="tab-group">
+            <li role="tab" class="selected tab">
+              <span class="tab-title">Example Title</span>
+              <button class="close-button">
+            </li>
+            <li role="tab" class="tab">
+              <span class="tab-title">Example Title</span>
+              <button class="close-button">
+            </li>
+            <li role="tab" class="tab">
+              <span class="tab-title">Example Title</span>
+              <button class="close-button">
+            </li>     
+          </ul>
+        </ul>
+      </menu>
+    
+      <menu type="toolbar" id="system-toolbar">
+      <ul role="tablist" id="app-tabs">
+        <li role="tab">
+          <a id="home-button" href="#"></a>
+        </li>
+        <li role="tab" class="selected">
+          <a href="#"></a>
+        </li>
       </ul>
-    </section>
-
-    <menu type="toolbar" id="window_toolbar">
-      <form id="address_bar">
-        <input id="url_input" type="text"></input>
-        <button id="url_button"></button>
-      </form>
-    </menu>
-
-    <iframe id="window_frame" mozbrowser="mozbrowser"></iframe>
-
-    <menu type="toolbar" id="system_toolbar">
       <span id="clock"></span>
     </menu>
+    
   </body>
-
 </html>

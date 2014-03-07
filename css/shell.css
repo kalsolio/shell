@@ -34,8 +34,122 @@ body {
   background-image: radial-gradient(closest-side, #434343 0%, #000 100%);
 }
 
+#power-button {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  background-image: url(../images/power.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+#windows {
+  position: absolute;
+  width: 100%;
+  box-sizing: border-box;
+  height: calc(100% - 30px);
+  top: 0;
+  border: solid 5px #666;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.window-group, .window {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+#app-toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 10px);
+  height: 35px;
+  background-color: #666;
+  margin: 0 5px;
+  padding: 0;
+  transition: transform 0.3s;
+  background-image: url(../images/gripper.gif);
+  background-position: center bottom 1px;
+  background-repeat: no-repeat;
+    transform: translateY(-30px);
+
+}
+
+#app-toolbar:hover {
+    transform: translateY(0);
+}
+
+#tabs {
+  width: calc(100%);
+  padding: 0;
+  height: 35px;
+}
+
+.tab-group {
+  height: 35px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.tab {
+  height: 25px;
+  flex: auto;
+  margin: 5px 0;
+  color: #fff;
+  line-height: 25px;
+  display: flex;
+  border-left: solid 1px #333;
+  background-image: url(../images/default_icon.png);
+  background-repeat: no-repeat;
+  background-position: left 5px center;
+  padding-left: 21px;
+}
+
+.tab:first-child {
+  margin-left: 0;
+  border-left: none;
+}
+
+.tab:last-child {
+  margin-right: 0;
+}
+
+.tab.selected {
+    background-color: #333;
+    border-radius: 5px;
+    border-left: none;
+}
+
+.tab.selected + .tab {
+  border-left: none;
+}
+
+.tab-title {
+  margin: 0 5px;
+  flex: auto;
+}
+
+.close-button {
+  background-color: transparent;
+  border: none;
+  width: 25px;
+  height: 25px;
+  background-image: url(../images/close.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
 /* Grid */
-#grid {
+/*#grid {
   display: none;
 }
 
@@ -66,10 +180,10 @@ body {
 
 #app_icons li span {
   color: white;
-}
+}*/
 
 /* Window Toolbar */
-#window_toolbar {
+/*#window_toolbar {
   display: none;
   position: fixed;
   top: 0;
@@ -155,10 +269,10 @@ body {
 
 #address_bar.selected #url_button {
   display: block;
-}
+}*/
 
 /* Window Frame */
-#window_frame {
+/*#window_frame {
   display: none;
   background-color: #fff;
   margin: 5px 0 0 0;
@@ -174,11 +288,13 @@ body {
 
 #window_frame.visible {
   display: block;
-}
+}*/
 
 /* System Toolbar */
-#system_toolbar {
+#system-toolbar {
   position: absolute;
+  display: flex;
+  flex-direction: row;
   bottom: 0;
   left: 0;
   right: 0;
@@ -189,8 +305,46 @@ body {
   color: #fff;
 }
 
+#system-toolbar #app-tabs {
+ flex: auto;
+ height: 30px;
+ margin: 0;
+ padding: 0;
+ padding-left: 5px;
+}
+
+#system-toolbar #app-tabs li {
+  list-style-type: none;
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+}
+
+#system-toolbar #app-tabs li a {
+  display: block;
+  width: 30px;
+  height: 25px;
+  background-image: url(../images/default_icon.png);
+  background-repeat: no-repeat;
+  background-position: center bottom 6px;
+}
+
+#system-toolbar #app-tabs li.selected a {
+ background-color: #666;
+ border-bottom-right-radius: 5px;
+ border-bottom-left-radius: 5px;
+}
+
+#system-toolbar #app-tabs #home-button {
+  background-image: url(../images/home.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
 #clock {
-  float: right;
+  display: block;
   line-height: 30px;
   padding: 0 10px;
 }
